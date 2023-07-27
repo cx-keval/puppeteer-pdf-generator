@@ -4,7 +4,7 @@ import { SimpleProfile } from "../components/SimpleProfile";
 import { generatePDF } from "../puppeteer/generatePDF";
 import { getHTMLPage } from "../utils/getHTMLPage";
 
-//CONTROLLER For: /api/user/createuser - To register new user account
+//CONTROLLER For: /api/psd/simple-profile - To get simple Profile PDF without graphs
 export const getSimpleProfilePDF: RequestHandler = async (
     req: Request,
     res: Response
