@@ -1,20 +1,24 @@
-import type { Request, RequestHandler, Response } from "express";
+import { Request, RequestHandler, Response } from "express";
 import ReactDOMServer from "react-dom/server";
-import { SimpleProfile } from "../components/SimpleProfile";
 import { generatePDF } from "../puppeteer/generatePDF";
-import { getHTMLPage } from "../utils/getHTMLPage";
+import { getHTMLPageWithGraph } from "../utils/getHTMLPageWithGraph";
+import { Graph } from "../components/Graph";
 
-//CONTROLLER For: /api/pdf/simple-profile - To get simple Profile PDF without graphs
-export const getSimpleProfilePDF: RequestHandler = async (
+//ROUTE: /api/pdf/graph-pdf - To get PDF with graph
+export const getGraphPDF: RequestHandler = async (
     req: Request,
     res: Response
 ) => {
     try {
-        const jsx = SimpleProfile(req.body);
+        const jsx = Graph();
         const html = ReactDOMServer.renderToString(jsx);
 
-        //Save & Send the rendered HTML to the client
-        const htmlTemplate = getHTMLPage(html);
+        // Send the rendered HTML to the client
+        const htmlTemplate = getHTMLPageWithGraph(
+            html,
+            JSON.stringify(req.body)
+        );
+
         const pdf = await generatePDF(htmlTemplate);
 
         if (pdf) {
@@ -25,7 +29,7 @@ export const getSimpleProfilePDF: RequestHandler = async (
             });
             res.end(pdf);
         } else {
-            res.status(400).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Something went wrong" });
         }
     } catch (error) {
         console.log(error);
