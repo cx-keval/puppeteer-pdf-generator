@@ -14,24 +14,21 @@ export const getIGProfile: RequestHandler = async (
         //Save & Send the rendered HTML to the client
         const html = IGProfile({ socialPage });
 
-        // const params = {
-        //     children: html,
-        //     statHistory: JSON.stringify(socialPage?.statHistory),
-        //     credibility: JSON.stringify(socialPage?.audience?.credibility),
-        //     genders: JSON.stringify(socialPage?.audience?.genders),
-        //     gendersPerAge: JSON.stringify(socialPage?.audience?.gendersPerAge),
-        //     recentPosts: JSON.stringify(
-        //         socialPage?.recentPosts?.map((e: any) => ({
-        //             likes: e.likes,
-        //             comments: e.comments,
-        //             created: e.created,
-        //         }))
-        //     ),
-        // };
+        const data = {
+            statHistory: socialPage?.statHistory,
+            credibility: socialPage?.audience?.credibility,
+            genders: socialPage?.audience?.genders,
+            gendersPerAge: socialPage?.audience?.gendersPerAge,
+            recentPosts: socialPage?.recentPosts?.map((e: any) => ({
+                likes: e.likes,
+                comments: e.comments,
+                created: e.created,
+            })),
+        };
 
         const finalHTML = IGProfileWithGraphs({
             children: html,
-            stringifiedData: JSON.stringify(req.body),
+            stringifiedData: JSON.stringify(data),
         });
 
         const pdf = await generatePDF(finalHTML);

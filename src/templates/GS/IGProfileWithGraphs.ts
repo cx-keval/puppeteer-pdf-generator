@@ -5,7 +5,6 @@ export const IGProfileWithGraphs = ({
     children: string;
     stringifiedData: string;
 }) => {
-    console.log(stringifiedData);
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -102,17 +101,15 @@ export const IGProfileWithGraphs = ({
             }
 
             // ---------------  All necessary Data   ----------------
-            const socialPage = JSON.parse('${stringifiedData}')
+            const data = JSON.parse('${stringifiedData}')
 
-            const statHistory  = socialPage?.statHistory
-            const credibility = socialPage?.audience?.credibility
-            const genders = socialPage?.audience?.genders
-            const gendersPerAge = socialPage?.audience?.gendersPerAge
-            const recentPosts = socialPage?.recentPosts?.map((e: any) => ({
-                    likes: e.likes,
-                    comments: e.comments,
-                    created: e.created,
-                }))
+            const {
+                statHistory,
+                credibility,
+                genders,
+                gendersPerAge,
+                recentPosts,
+            } = data
 
 
             // ---------------  Followers Growth Graph Logic   ----------------
@@ -584,7 +581,6 @@ export const IGProfileWithGraphs = ({
             genderSplitChart.render();
 
             // ---------------  Credibility Graph Logic   ----------------
-            const credibility = 0.887999
 
             const CR_Options = {
                 series: [parseFloat((credibility * 100).toFixed(2))],
