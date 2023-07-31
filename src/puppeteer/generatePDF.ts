@@ -10,7 +10,7 @@ export const generatePDF = async (template: string) => {
 
         // Set html markup to page and wait until all network requests are fulfilled
         await page.setContent(template, {
-            waitUntil: "networkidle2",
+            waitUntil: "networkidle0",
         });
 
         //To reflect CSS used for screens instead of print
