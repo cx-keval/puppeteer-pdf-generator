@@ -413,7 +413,7 @@ const IGProfile = ({ socialPage }: IIGProfile) => {
                 >
                     <div
                         aria-label="section-title"
-                        className="border-b-[4px] border-primary w-fit ml-4 text-xl text-primary font-medium"
+                        className="w-fit ml-4 text-xl text-primary font-medium"
                     >
                         Overview
                     </div>
@@ -565,9 +565,9 @@ const IGProfile = ({ socialPage }: IIGProfile) => {
                                       ?.filter((_, idx) => idx < 15)
                                       .map((item, idx) => (
                                           <p
-                                              aria-label="list-item"
-                                              className="px-3 py-0.5 text-white font-light bg-primary rounded-[50vw]"
                                               key={idx}
+                                              aria-label="list-item"
+                                              className="px-3 py-0.5 text-primary font-base bg-secondary-100 rounded-[50vw] border border-primary"
                                           >
                                               {`#${item.tag}`}
                                           </p>
@@ -590,7 +590,7 @@ const IGProfile = ({ socialPage }: IIGProfile) => {
                                           <p
                                               key={idx}
                                               aria-label="list-item"
-                                              className="px-3 py-0.5 text-white font-light bg-primary rounded-[50vw]"
+                                              className="px-3 py-0.5 text-primary font-base bg-secondary-100 rounded-[50vw] border border-primary"
                                           >
                                               {`@${item.tag}`}
                                           </p>
@@ -607,7 +607,7 @@ const IGProfile = ({ socialPage }: IIGProfile) => {
                 >
                     <div
                         aria-label="section-title"
-                        className="border-b-[4px] border-primary w-fit ml-4 text-xl text-primary font-medium"
+                        className="w-fit ml-4 text-xl text-primary font-medium"
                     >
                         Audience
                     </div>
@@ -936,52 +936,60 @@ const IGProfile = ({ socialPage }: IIGProfile) => {
                     </thead>
                     <tbody>
                         {audience.notableUsers.length > 0
-                            ? audience.notableUsers.map((user) => (
-                                  <tr
-                                      key={user.userId}
-                                      className="border-b-[1px]"
-                                      style={{ paddingBottom: "1rem" }}
-                                  >
-                                      <td
-                                          aria-label="Influencer"
-                                          className="py-3"
+                            ? audience.notableUsers
+                                  .filter((_, idx) => idx < 10)
+                                  .map((user) => (
+                                      <tr
+                                          key={user.userId}
+                                          className="border-b-[1px]"
+                                          style={{ paddingBottom: "1rem" }}
                                       >
-                                          <div className="flex gap-2">
-                                              <img
-                                                  src={user.picture}
-                                                  alt="profile"
-                                                  className="w-[50px] h-[50px] rounded-full object-cover"
-                                              />
-                                              <div>
-                                                  <h1
-                                                      aria-label="name"
-                                                      className="text-xl font-semibold"
-                                                  >
-                                                      {user.fullname}
-                                                  </h1>
-                                                  <p
-                                                      aria-label="username"
-                                                      className="text-sky-500"
-                                                  >
-                                                      {`@${user.username}`}
-                                                  </p>
+                                          <td
+                                              aria-label="Influencer"
+                                              className="py-3"
+                                          >
+                                              <div className="flex gap-2">
+                                                  <img
+                                                      src={user.picture}
+                                                      alt="profile"
+                                                      className="w-[50px] h-[50px] rounded-full object-cover"
+                                                  />
+                                                  <div>
+                                                      <h1
+                                                          aria-label="name"
+                                                          className="text-xl font-semibold"
+                                                      >
+                                                          {user.fullname}
+                                                      </h1>
+                                                      <a
+                                                          href={`https://www.instagram.com/${user.username}`}
+                                                          target="_blank"
+                                                          rel="noopener noreferrer"
+                                                      >
+                                                          <p
+                                                              aria-label="username"
+                                                              className="text-sky-500"
+                                                          >
+                                                              {`@${user.username}`}
+                                                          </p>
+                                                      </a>
+                                                  </div>
                                               </div>
-                                          </div>
-                                      </td>
-                                      <td
-                                          aria-label="followers"
-                                          className="text-center font-semibold"
-                                      >
-                                          {beautify(user.followers)}
-                                      </td>
-                                      <td
-                                          aria-label="Engagement"
-                                          className="text-end font-semibold"
-                                      >
-                                          {beautify(user.engagements)}
-                                      </td>
-                                  </tr>
-                              ))
+                                          </td>
+                                          <td
+                                              aria-label="followers"
+                                              className="text-center font-semibold"
+                                          >
+                                              {beautify(user.followers)}
+                                          </td>
+                                          <td
+                                              aria-label="Engagement"
+                                              className="text-end font-semibold"
+                                          >
+                                              {beautify(user.engagements)}
+                                          </td>
+                                      </tr>
+                                  ))
                             : "No Notable Followers"}
                     </tbody>
                 </table>
@@ -1000,52 +1008,60 @@ const IGProfile = ({ socialPage }: IIGProfile) => {
                     </thead>
                     <tbody>
                         {audience.audienceLookalikes.length > 0
-                            ? audience.audienceLookalikes.map((user) => (
-                                  <tr
-                                      key={user.userId}
-                                      className="border-b-[1px]"
-                                      style={{ paddingBottom: "1rem" }}
-                                  >
-                                      <td
-                                          aria-label="Influencer"
-                                          className="py-3"
+                            ? audience.audienceLookalikes
+                                  .filter((_, idx) => idx < 10)
+                                  .map((user) => (
+                                      <tr
+                                          key={user.userId}
+                                          className="border-b-[1px]"
+                                          style={{ paddingBottom: "1rem" }}
                                       >
-                                          <div className="flex gap-2">
-                                              <img
-                                                  src={user.picture}
-                                                  alt="profile"
-                                                  className="w-[50px] h-[50px] rounded-full object-cover"
-                                              />
-                                              <div>
-                                                  <h1
-                                                      aria-label="name"
-                                                      className="text-xl font-semibold"
-                                                  >
-                                                      {user.fullname}
-                                                  </h1>
-                                                  <p
-                                                      aria-label="username"
-                                                      className="text-sky-500"
-                                                  >
-                                                      {`@${user.username}`}
-                                                  </p>
+                                          <td
+                                              aria-label="Influencer"
+                                              className="py-3"
+                                          >
+                                              <div className="flex gap-2">
+                                                  <img
+                                                      src={user.picture}
+                                                      alt="profile"
+                                                      className="w-[50px] h-[50px] rounded-full object-cover"
+                                                  />
+                                                  <div>
+                                                      <h1
+                                                          aria-label="name"
+                                                          className="text-xl font-semibold"
+                                                      >
+                                                          {user.fullname}
+                                                      </h1>
+                                                      <a
+                                                          href={`https://www.instagram.com/${user.username}`}
+                                                          target="_blank"
+                                                          rel="noopener noreferrer"
+                                                      >
+                                                          <p
+                                                              aria-label="username"
+                                                              className="text-sky-500"
+                                                          >
+                                                              {`@${user.username}`}
+                                                          </p>
+                                                      </a>
+                                                  </div>
                                               </div>
-                                          </div>
-                                      </td>
-                                      <td
-                                          aria-label="followers"
-                                          className="text-center font-semibold"
-                                      >
-                                          {beautify(user.followers)}
-                                      </td>
-                                      <td
-                                          aria-label="Engagement"
-                                          className="text-end font-semibold"
-                                      >
-                                          {beautify(user.engagements)}
-                                      </td>
-                                  </tr>
-                              ))
+                                          </td>
+                                          <td
+                                              aria-label="followers"
+                                              className="text-center font-semibold"
+                                          >
+                                              {beautify(user.followers)}
+                                          </td>
+                                          <td
+                                              aria-label="Engagement"
+                                              className="text-end font-semibold"
+                                          >
+                                              {beautify(user.engagements)}
+                                          </td>
+                                      </tr>
+                                  ))
                             : "No Notable Followers"}
                     </tbody>
                 </table>

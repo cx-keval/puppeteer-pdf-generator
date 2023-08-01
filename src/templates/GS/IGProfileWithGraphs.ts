@@ -60,7 +60,7 @@ export const IGProfileWithGraphs = ({
 
             .card-title {
                 color: rgba(0, 0, 0, 0.50);
-                margin-top: 1.25rem;
+                margin-top: 1.5rem;
                 margin-bottom: 0.5rem;
                 font-weight: 500;
             }
@@ -338,12 +338,10 @@ export const IGProfileWithGraphs = ({
                 series: [
                     {
                         name: 'Likes',
-                        group: 'likes',
                         data: recentPosts?.map((item) => (item.likes))
                     },
                     {
                         name: 'Comments',
-                        group: 'comments',
                         data: recentPosts?.map((item) => (item.comments))
                     }
                 ],
@@ -366,11 +364,11 @@ export const IGProfileWithGraphs = ({
                 dataLabels: {
                     position: "top",
                     offsetX: 0,
-                    offsetY: 20,
+                    offsetY: -20,
                     formatter: (v) => millify(v),
                     enabled: true,
                     style: {
-                        fontSize: '16px',
+                        fontSize: '13px',
                         fontWeight: 600
                     },
                     background: {
@@ -378,7 +376,7 @@ export const IGProfileWithGraphs = ({
                         padding: 10,
                         borderWidth: 0,
                         foreColor: '#111',
-                        opacity: 0.35,
+                        opacity: 0,
                     },
                 },
                 colors: ['#350e5f', '#9e4ad1'],
@@ -400,9 +398,16 @@ export const IGProfileWithGraphs = ({
                 },
                 plotOptions: {
                     bar: {
-                        horizontal: false,
-                        borderRadius: 1,
-                    },
+                        dataLabels: {
+                            position: 'top'
+                        },
+                        borderRadius: 4,
+
+                    }
+                },
+                stroke: {
+                    colors: ["transparent"],
+                    width: 5
                 },
                 legend: {
                     position: 'top',
